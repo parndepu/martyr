@@ -11,37 +11,41 @@ def semantic_search(text):
 def parse_pdf(file_path):
     """ Extract text from pdf document """
     content = parser.from_file(file_path)
+
     if 'content' in content:
         text = content['content']
     else:
         return
-        
+
     text = str(text)
     # Ensure text is utf-8 formatted
     safe_text = text.encode('utf-8', errors='ignore')
     # Escape any \ issues
     safe_text = str(safe_text).replace('\\','\\\\').replace('"', '\\"')
+
     return safe_text
 
 def preprocess(text):
     """ Detect english text and print it """
     print('Processing your document:')
+    
     result = ''
     line_length = len(text.splitlines())
     # Progress bar
     bar = ChargingBar('Processing', max=line_length)
     
     for line in text.splitlines():
-        # Remove all special characters
+        # Remove special characters
         line_str = re.sub(r"[^a-zA-Z0-9]+", ' ', line)
         # Check no empty, not contain only numbers
         if (not line_str.isspace()) and line_str and (not bool(re.match('^[0-9 ]+$', line_str))):
-            # Decode utf8 and detect only english language
+            # Detect english language
             if detect(line_str.decode("utf-8")) == 'en':
-
                 result += line_str + '\n'
+        
         bar.next()
     bar.finish()
+
     return result
 
 def set_utf8_encoding():
