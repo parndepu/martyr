@@ -1,6 +1,8 @@
 # martyr
 
-## Install java8 and Tika
+Relationship Extraction in the document (pdf)
+
+## Instructions
 ```
 brew tap caskroom/versions
 brew cask install java8
