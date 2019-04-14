@@ -1,6 +1,7 @@
 # martyr
 
-Relationship Extraction in the document (pdf)
+- Read .pdf document
+- Provides semantic search with keyword and chapter number
 
 ## Instructions
 ```
